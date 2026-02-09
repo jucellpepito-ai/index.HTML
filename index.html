@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine 💖</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 20px;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      color: #e91e63;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      width: 120px;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    #startBtn, #yes {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    #no {
+      background-color: #ccc;
+      position: absolute;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff1744;
+      animation: float 6s infinite;
+      font-size: 20px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STEP 1 -->
+  <div class="container" id="nameScreen">
+    <h1>💕 Valentine Setup 💕</h1>
+    <p>This confession is from <strong>Jucell Jean Pepito</strong> 💖</p>
+    <input type="text" id="boyName" placeholder="Your Name 💘">
+    <button id="startBtn" onclick="startProposal()">Continue 🌹</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="container" id="proposalScreen" style="display:none;">
+    <h1>Hi <span id="boy"></span> 💕</h1>
+    <p>Jucell Jean Pepito has something special to ask you 💌</p>
+    <h1>Will you be my Valentine? 🌹</h1>
+
+    <button id="yes" onclick="yesClicked()">Yes 💘</button>
+    <button id="no" onmouseover="moveNo()">No 💔</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="container" id="messageScreen" style="display:none;">
+    <h1>💖 For You, <span id="boyFinal"></span> 💖</h1>
+
+    <p>
+      Matagal ko na ‘tong nararamdaman, at parang ngayon lang ako nagkaroon ng
+      lakas ng loob na aminin.
+    </p>
+
+    <p>
+      Hindi ko alam kung kailan o paano nagsimula, pero unti-unti kang naging
+      dahilan ng mga ngiti ko. Sa mga simpleng moments, bigla na lang kitang
+      naiisip. Parang mas gumagaan ang araw ko knowing na andiyan ka lang,
+      kahit hindi tayo magkasama.
+    </p>
+
+    <p>
+      Hindi ako nagmamadali, at wala akong hinihinging kapalit. Gusto ko lang
+      maging honest—kasi totoo ‘tong nararamdaman ko. I care about you more than
+      I can explain, at mas mahalaga ka sa akin kaysa sa iniisip mo.
+    </p>
+
+    <p>
+      So eto na… aamin na ako.<br>
+      <strong>I like you, <span id="boyAgain"></span>.</strong><br>
+      Hindi basta-basta, hindi panandalian. Totoo at galing sa puso.
+      At kung nagtataka ka kung may halaga ka sa buhay ko—oo, sobra. ❤️
+    </p>
+
+    <p><strong>— Jucell Jean Pepito 💖</strong></p>
+  </div>
+
+  <script>
+    let boyName = "";
+
+    function startProposal() {
+      const boy = document.getElementById("boyName").value;
+
+      if (boy === "") {
+        alert("Please enter your name 💕");
+        return;
+      }
+
+      boyName = boy;
+      document.getElementById("boy").innerText = boy;
+
+      document.getElementById("nameScreen").style.display = "none";
+      document.getElementById("proposalScreen").style.display = "block";
+    }
+
+    function yesClicked() {
+      document.getElementById("proposalScreen").style.display = "none";
+      document.getElementById("messageScreen").style.display = "block";
+
+      document.getElementById("boyFinal").innerText = boyName;
+      document.getElementById("boyAgain").innerText = boyName;
+    }
+
+    function moveNo() {
+      const no = document.getElementById("no");
+      no.style.left = Math.random() * (window.innerWidth - 100) + "px";
+      no.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 10 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+  </script>
+
+</body>
+</html>
